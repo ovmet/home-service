@@ -1,0 +1,43 @@
+{
+  "naming": {
+    "models": "Singular, PascalCase (e.g., RepairOrder)",
+    "controllers": "PascalCase, terminar en Controller (e.g., ClientController)",
+    "migrations": "snake_case, describiendo la acción (e.g., create_clients_table)",
+    "tables": "snake_case, plural (e.g., repair_orders)",
+    "variables": "camelCase para PHP, snake_case para SQL"
+  },
+  "structure": {
+    "models": "En app/Models, uno por entidad principal",
+    "controllers": "En app/Http/Controllers, separados por dominio si es necesario",
+    "migrations": "En database/migrations, una por tabla o cambio estructural",
+    "seeders": "En database/seeders, uno por tabla principal"
+  },
+  "eloquent": {
+    "relationships": "Definir explícitamente belongsTo, hasMany, etc. en los modelos",
+    "mass_assignment": "Usar $fillable o $guarded en los modelos para proteger asignación masiva"
+  },
+  "security": {
+    "env": "Nunca subir .env a control de versiones",
+    "passwords": "Siempre hashear contraseñas (bcrypt)",
+    "validation": "Validar todos los datos de entrada en controladores o Form Requests"
+  },
+  "style": {
+    "php": "PSR-12, llaves en nueva línea, indentación 4 espacios",
+    "blade": "Evitar lógica compleja en vistas, usar componentes cuando sea posible"
+  },
+  "database": {
+    "foreign_keys": "Usar claves foráneas para integridad referencial",
+    "nullable": "Solo cuando sea necesario, preferir NOT NULL por defecto"
+  },
+  "testing": {
+    "factories": "Usar model factories para pruebas y seeders avanzados",
+    "phpunit": "Mantener pruebas en tests/ organizadas por tipo"
+  },
+  "git": {
+    "ignore": "Agregar node_modules, vendor, .env, y archivos temporales a .gitignore"
+  },
+  "documentation": {
+    "readme": "Mantener un README.md actualizado con instrucciones de instalación y uso",
+    "comments": "Comentar solo donde el código no sea autoexplicativo"
+  }
+} 

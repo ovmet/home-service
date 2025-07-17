@@ -1,0 +1,36 @@
+{
+    "naming": {
+      "models": "PascalCase singular (e.g., Service, Client)",
+      "controllers": "PascalCase singular + Controller (e.g., ServiceController)",
+      "migrations": "snake_case plural (e.g., create_services_table)",
+      "tables": "snake_case plural (e.g., services, clients)",
+      "variables": "camelCase",
+      "views": "snake_case"
+    },
+    "structure": {
+      "controllers": "Solo lógica de orquestación, no lógica de negocio",
+      "models": "Solo relaciones y scopes, no lógica de negocio compleja",
+      "services": "Lógica de negocio compleja en app/Services",
+      "requests": "Validación en Form Requests",
+      "routes": "Solo llamadas a controladores, no lógica inline"
+    },
+    "database": {
+      "foreign_keys": "Siempre usar claves foráneas y restricciones ON DELETE/UPDATE",
+      "timestamps": "Todas las tablas deben tener created_at y updated_at",
+      "soft_deletes": "Usar soft deletes donde sea necesario"
+    },
+    "security": {
+      "auth": "Usar middleware de autenticación en rutas protegidas",
+      "validation": "Validar todos los datos de entrada",
+      "passwords": "Nunca guardar contraseñas en texto plano"
+    },
+    "code_quality": {
+      "psr": "Seguir PSR-12 para PHP",
+      "comments": "Comentar funciones y métodos complejos",
+      "tests": "Agregar pruebas para lógica crítica"
+    },
+    "git": {
+      "commits": "Mensajes de commit claros y descriptivos",
+      "branches": "Usar ramas para features, fixes y releases"
+    }
+  }
