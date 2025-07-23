@@ -53,6 +53,13 @@
             <label for="notes" class="form-label">Notas</label>
             <textarea name="notes" class="form-control">{{ old('notes', $repairOrder->notes) }}</textarea>
         </div>
+        <div class="mb-3">
+            <label for="service_location" class="form-label">Ubicación del servicio</label>
+            <select name="service_location" class="form-control" required>
+                <option value="taller" {{ old('service_location', $repairOrder->service_location) == 'taller' ? 'selected' : '' }}>En taller</option>
+                <option value="foraneo" {{ old('service_location', $repairOrder->service_location) == 'foraneo' ? 'selected' : '' }}>Foráneo</option>
+            </select>
+        </div>
         <button type="submit" class="btn btn-success">Actualizar</button>
         <a href="{{ route('repair-orders.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>

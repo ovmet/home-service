@@ -18,14 +18,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/">Inicio</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/technicians">Técnicos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/clients">Clientes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/company">Empresa</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="configuracionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Configuración
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="configuracionDropdown">
+                            <li><a class="dropdown-item" href="/company">Empresa</a></li>
+                            <li><a class="dropdown-item" href="/technicians">Técnicos</a></li>
+                            <li><a class="dropdown-item" href="/clients">Clientes</a></li>
+                            <li><a class="dropdown-item" href="/statuses">Status</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="equiposDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,9 +41,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/repair-orders">Órdenes de Reparación</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/statuses">Status</a>
                     </li>
                 </ul>
             </div>

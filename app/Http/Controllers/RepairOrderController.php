@@ -114,4 +114,60 @@ class RepairOrderController extends Controller
         $pdf = Pdf::loadView('repair_orders.pdf', compact('repairOrders'));
         return $pdf->download('ordenes_reparacion.pdf');
     }
+
+    public function reporteForaneoTaller(Request $request)
+    {
+        $query = RepairOrder::with(['device.client', 'device.deviceType']);
+        if ($request->filled('service_location')) {
+            $query->where('service_location', $request->service_location);
+        }
+        if ($request->filled('entry_date_from')) {
+            $query->whereDate('entry_date', '>=', $request->entry_date_from);
+        }
+        if ($request->filled('entry_date_to')) {
+            $query->whereDate('entry_date', '<=', $request->entry_date_to);
+        }
+        $repairOrders = $query->get();
+        return view('repair_orders.reporte', compact('repairOrders'));
+    }
+
+    public function reporteForaneoTallerPdf(Request $request)
+    {
+        $query = RepairOrder::with(['device.client', 'device.deviceType']);
+        if ($request->filled('service_location')) {
+            $query->where('service_location', $request->service_location);
+        }
+        if ($request->filled('entry_date_from')) {
+            $query->whereDate('entry_date', '>=', $request->entry_date_from);
+        }
+        if ($request->filled('entry_date_to')) {
+            $query->whereDate('entry_date', '<=', $request->entry_date_to);
+        }
+        $repairOrders = $query->get();
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('repair_orders.reporte_pdf', compact('repairOrders'));
+        return $pdf->download('reporte_servicios.pdf');
+    }
+
+    public function reporteFechas(Request $request)
+    {
+        $query = RepairOrder::with(['device.client', 'technician', 'status']);
+        if ($request->filled('entry_date_from')) {
+            $query->whereDate('entry_date', '>=', $request->entry_date_from);
+        }
+        if ($request->filled('entry_date_to')) {
+            $query->whereDate('entry_date', '<=', $request->entry_date_to);
+        }
+        if ($request->filled('technician_id')) {
+            $query->where('technician_id', $request->technician_id);
+        }
+        if ($request->filled('client_id')) {
+            $query->whereHas('device.client', function ($q) use ($request) {
+                $q->where('id', $request->client_id);
+            });
+        }
+        $repairOrders = $query->get();
+        $technicians = \App\Models\Technician::all();
+        $clients = \App\Models\Client::all();
+        return view('repair_orders.reporte_fechas', compact('repairOrders', 'technicians', 'clients'));
+    }
 }

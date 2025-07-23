@@ -3,7 +3,10 @@
 @section('content')
 <div class="container">
     <h1>Clientes</h1>
-    <a href="{{ route('clients.create') }}" class="btn btn-primary mb-3">Nuevo Cliente</a>
+    <div class="mb-3">
+        <a href="{{ route('clients.create') }}" class="btn btn-primary">Nuevo Cliente</a>
+        <a href="{{ route('clients.import.form') }}" class="btn btn-success">Importar Clientes</a>
+    </div>
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif

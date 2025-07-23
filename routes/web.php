@@ -15,6 +15,8 @@ Route::get('/', function () {
 });
 
 Route::resource('technicians', TechnicianController::class);
+Route::get('clients/import', [App\Http\Controllers\ClientController::class, 'importForm'])->name('clients.import.form');
+Route::post('clients/import', [App\Http\Controllers\ClientController::class, 'import'])->name('clients.import');
 Route::resource('clients', ClientController::class);
 Route::resource('devices', DeviceController::class);
 Route::resource('repair-orders', RepairOrderController::class);
@@ -22,5 +24,8 @@ Route::resource('brands', BrandController::class);
 Route::resource('device-types', DeviceTypeController::class);
 Route::resource('statuses', StatusController::class);
 Route::get('repair-orders/export/pdf', [App\Http\Controllers\RepairOrderController::class, 'exportPdf'])->name('repair-orders.export.pdf');
+Route::get('repair-orders/reporte/foraneo-taller', [App\Http\Controllers\RepairOrderController::class, 'reporteForaneoTaller'])->name('repair-orders.reporte.foraneo-taller');
+Route::get('repair-orders/reporte/foraneo-taller/pdf', [App\Http\Controllers\RepairOrderController::class, 'reporteForaneoTallerPdf'])->name('repair-orders.reporte.foraneo-taller.pdf');
+Route::get('repair-orders/reporte/fechas', [App\Http\Controllers\RepairOrderController::class, 'reporteFechas'])->name('repair-orders.reporte.fechas');
 Route::get('/company', [App\Http\Controllers\CompanyController::class, 'edit'])->name('company.edit');
 Route::post('/company', [App\Http\Controllers\CompanyController::class, 'update'])->name('company.update');

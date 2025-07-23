@@ -12,41 +12,36 @@
             @endif
             <h2>{{ $company->name }}</h2>
             <p>{{ $company->address }}</p>
-            <p>{{ $company->phone }}</p>
-            <p>{{ $company->email }}</p>
+            <p style="font-size: 14px; color: #555;">
+                {{ $company->phone }}
+                @if($company->phone && $company->email) | @endif
+                {{ $company->email }}
+            </p>
         </div>
     @endif
+    <div class="text-center mb-4">
+        <a href="{{ route('repair-orders.create') }}" class="btn btn-success btn-lg" style="margin-bottom: 20px;">
+            <i class="fas fa-plus"></i> NUEVA ORDEN
+        </a>
+        <a href="{{ route('repair-orders.reporte.fechas') }}" class="btn btn-info btn-lg" style="margin-bottom: 20px; margin-left: 10px;">
+            <i class="fas fa-calendar-alt"></i> ORDENES x FECHAS
+        </a>
+    </div>
     <h1 class="mb-4">Bienvenido al CRM de Reparaciones</h1>
     <div class="row">
         <div class="col-md-6 col-lg-3 mb-3">
             <div class="card h-100">
                 <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                    <h5 class="card-title">Técnicos</h5>
-                    <a href="{{ route('technicians.index') }}" class="btn btn-primary mt-2">Ver Técnicos</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-3 mb-3">
-            <div class="card h-100">
-                <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                    <h5 class="card-title">Clientes</h5>
-                    <a href="{{ route('clients.index') }}" class="btn btn-primary mt-2">Ver Clientes</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-3 mb-3">
-            <div class="card h-100">
-                <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                    <h5 class="card-title">Equipos</h5>
-                    <a href="{{ route('devices.index') }}" class="btn btn-primary mt-2">Ver Equipos</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-3 mb-3">
-            <div class="card h-100">
-                <div class="card-body d-flex flex-column justify-content-center align-items-center">
                     <h5 class="card-title">Órdenes de Reparación</h5>
                     <a href="{{ route('repair-orders.index') }}" class="btn btn-primary mt-2">Ver Órdenes</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-3">
+            <div class="card h-100 border-danger">
+                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                    <h5 class="card-title text-danger">Reporte de rutas</h5>
+                    <a href="{{ route('repair-orders.reporte.foraneo-taller') }}" class="btn btn-danger mt-2">Ver reporte foráneo/taller</a>
                 </div>
             </div>
         </div>

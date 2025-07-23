@@ -52,6 +52,7 @@
                 <th>Costo</th>
                 <th>Entrada</th>
                 <th>Salida</th>
+                <th>Ubicación</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -67,6 +68,7 @@
                 <td>{{ $order->cost }}</td>
                 <td>{{ $order->entry_date }}</td>
                 <td>{{ $order->exit_date }}</td>
+                <td>{{ $order->service_location == 'foraneo' ? 'Foráneo' : 'En taller' }}</td>
                 <td>
                     <a href="{{ route('repair-orders.show', $order) }}" class="btn btn-info btn-sm">Ver</a>
                     <a href="{{ route('repair-orders.edit', $order) }}" class="btn btn-warning btn-sm">Editar</a>

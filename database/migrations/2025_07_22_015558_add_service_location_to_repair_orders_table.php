@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('companies', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('repair_orders', function (Blueprint $table) {
+            $table->string('service_location')->default('taller')->after('notes');
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('companies');
+        Schema::table('repair_orders', function (Blueprint $table) {
+            $table->dropColumn('service_location');
+        });
     }
 };

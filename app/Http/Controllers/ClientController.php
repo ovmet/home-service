@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ClientsImport;
 
 class ClientController extends Controller
 {
@@ -58,5 +60,24 @@ class ClientController extends Controller
     {
         $client->delete();
         return redirect()->route('clients.index')->with('success', 'Cliente eliminado correctamente.');
+    }
+
+    public function importForm()
+    {
+        return view('clients.import');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls',
+        ]);
+
+        try {
+            Excel::import(new ClientsImport, $request->file('file'));
+            return redirect()->route('clients.index')->with('success', 'Clientes importados correctamente.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error al importar: ' . $e->getMessage());
+        }
     }
 }

@@ -6,12 +6,16 @@
     <form method="GET" action="{{ route('repair-orders.create') }}" class="mb-4">
         <div class="mb-3">
             <label for="client_id" class="form-label">Cliente</label>
-            <select name="client_id" class="form-control" onchange="this.form.submit()" required>
-                <option value="">Seleccione un cliente</option>
-                @foreach($clients as $client)
-                    <option value="{{ $client->id }}" {{ (isset($clientId) && $clientId == $client->id) ? 'selected' : '' }}>{{ $client->name }}</option>
-                @endforeach
-            </select>
+            <div class="d-flex gap-2 align-items-center">
+                <select name="client_id" class="form-control" onchange="this.form.submit()" required>
+                    <option value="">Seleccione un cliente</option>
+                    @foreach($clients as $client)
+                        <option value="{{ $client->id }}" {{ (isset($clientId) && $clientId == $client->id) ? 'selected' : '' }}>{{ $client->name }}</option>
+                    @endforeach
+                </select>
+                <a href="{{ route('clients.create') }}" class="btn btn-outline-primary" target="_blank">Nuevo Cliente</a>
+            </div>
+            <small class="form-text text-muted">¿No encuentras el cliente? Haz clic en "Nuevo Cliente" para darlo de alta. <b>Recarga esta página después de registrar el cliente para seleccionarlo.</b></small>
         </div>
     </form>
     @if(isset($clientId) && $clientId && $devices->count())
@@ -64,6 +68,13 @@
         <div class="mb-3">
             <label for="notes" class="form-label">Notas</label>
             <textarea name="notes" class="form-control">{{ old('notes') }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="service_location" class="form-label">Ubicación del servicio</label>
+            <select name="service_location" class="form-control" required>
+                <option value="taller" {{ old('service_location') == 'taller' ? 'selected' : '' }}>En taller</option>
+                <option value="foraneo" {{ old('service_location') == 'foraneo' ? 'selected' : '' }}>Foráneo</option>
+            </select>
         </div>
         <button type="submit" class="btn btn-success">Guardar</button>
         <a href="{{ route('repair-orders.index') }}" class="btn btn-secondary">Cancelar</a>

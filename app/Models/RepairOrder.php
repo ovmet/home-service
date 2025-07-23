@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RepairOrder extends Model
 {
-    protected $fillable = ['device_id', 'technician_id', 'status_id', 'description', 'cost', 'entry_date', 'exit_date', 'notes'];
+    protected $fillable = ['device_id', 'technician_id', 'status_id', 'description', 'cost', 'entry_date', 'exit_date', 'notes', 'service_location'];
     public function device()
     {
         return $this->belongsTo(Device::class);
