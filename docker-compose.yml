@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: home-services-crm
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+      - ./storage/app/public:/var/www/public/storage
+    networks:
+      - home-services-network
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: home-services-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: home_services_crm
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: home_services
+      MYSQL_PASSWORD: home_services
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - home-services-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: home-services-nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - home-services-network
+    depends_on:
+      - app
+
+volumes:
+  db_data:
+
+networks:
+  home-services-network:
+    driver: bridge 

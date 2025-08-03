@@ -19,6 +19,7 @@ Route::get('clients/import', [App\Http\Controllers\ClientController::class, 'imp
 Route::post('clients/import', [App\Http\Controllers\ClientController::class, 'import'])->name('clients.import');
 Route::resource('clients', ClientController::class);
 Route::resource('devices', DeviceController::class);
+Route::get('repair-orders/search', [App\Http\Controllers\RepairOrderController::class, 'search'])->name('repair-orders.search');
 Route::resource('repair-orders', RepairOrderController::class);
 Route::resource('brands', BrandController::class);
 Route::resource('device-types', DeviceTypeController::class);

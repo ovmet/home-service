@@ -170,4 +170,45 @@ class RepairOrderController extends Controller
         $clients = \App\Models\Client::all();
         return view('repair_orders.reporte_fechas', compact('repairOrders', 'technicians', 'clients'));
     }
+
+    public function search(Request $request)
+    {
+        $query = RepairOrder::with(['device.client', 'technician', 'status']);
+
+        // Búsqueda por ID de orden
+        if ($request->filled('order_id')) {
+            $query->where('id', $request->order_id);
+        }
+
+        // Búsqueda por nombre de cliente
+        if ($request->filled('client_name')) {
+            $query->whereHas('device.client', function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->client_name . '%');
+            });
+        }
+
+        // Búsqueda por rango de fechas
+        if ($request->filled('date_from')) {
+            $query->whereDate('entry_date', '>=', $request->date_from);
+        }
+        if ($request->filled('date_to')) {
+            $query->whereDate('entry_date', '<=', $request->date_to);
+        }
+
+        // Búsqueda por nombre de técnico
+        if ($request->filled('technician_name')) {
+            $query->whereHas('technician', function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->technician_name . '%');
+            });
+        }
+
+        // Búsqueda por status
+        if ($request->filled('status_id')) {
+            $query->where('status_id', $request->status_id);
+        }
+
+        $repairOrders = $query->orderBy('id', 'desc')->get();
+        
+        return view('repair_orders.search_results', compact('repairOrders'));
+    }
 }
